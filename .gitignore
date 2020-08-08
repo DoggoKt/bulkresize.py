@@ -1,0 +1,5 @@
+# Built binaries
+dist/
+
+# Build script
+build.py
