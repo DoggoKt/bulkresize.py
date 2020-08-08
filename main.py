@@ -33,7 +33,7 @@ try:
   clear()
 
   from PIL import Image
-  ResizeTo = (int(input("What width should I scale the image to: ")),int(input("What height should I scale the image to: ")))
+  ResizeTo = (int(input("What width should I scale the images to: ")),int(input("What height should I scale the images to: ")))
   PreserveRatio = BoolInput("Preserve aspect ratio during resize? (Yes/No) ")
   clear()
   print("Resizing...")
