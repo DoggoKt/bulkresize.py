@@ -37,8 +37,8 @@ try:
   PreserveRatio = BoolInput("Preserve aspect ratio during resize? (Yes/No) ")
   clear()
   print("Resizing...")
-  
-  filesAmount = 0
+
+  imageCount = 0
   for file in list(filter(lambda f: isfile(f), listdir())):
   
     try:
@@ -53,8 +53,9 @@ try:
     
     filenameArray = file.split(".")
     image.save("{0}-{1}x{2}.{3}".format(".".join(filenameArray[0:len(filenameArray)-1]), image.width, image.height, filenameArray[len(filenameArray)-1]))
-    filesAmount+=1
-  if (filesAmount == 0): raise NoImagesError
+    imageCount+=1
+  if imageCount == 0: raise NoImagesError
+  print("Resized {0} images successfully!".format(imageCount))
 
 
 except IOError:
@@ -62,7 +63,7 @@ except IOError:
 except ValueError:
   Error("The supplied value needs to be a number - don't include the 'px'!")
 except BoolValueError:
-  Error("The supplied value may be 'Y' or 'N' only.")
+  Error("The supplied value may be 'yes' or 'no' only.")
 except NoImagesError:
   Error("There are no applicable images in this directory! Check where you're running this from and try again.")
 except ModuleNotFoundError:
@@ -70,7 +71,6 @@ except ModuleNotFoundError:
 except:
   Error("An unexpected error occured.")
 else:
-  print("Finished successfuly!")
   print("All files were saved by their original name with the new size suffixed.")
 finally:
   input("\033[1;30mPress [ENTER] to exit\033[0m")
