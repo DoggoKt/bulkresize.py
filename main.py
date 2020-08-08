@@ -1,4 +1,3 @@
-from PIL import Image
 from sys import platform
 from os import system, listdir
 from os.path import isfile
@@ -10,7 +9,7 @@ class TooLargeError(Exception):
   """Raised when the size specified is out of bounds"""
   pass
 class NoImagesError(Exception):
-  """Raided when there are no images in the directory"""
+  """Raised when there are no images in the directory"""
   pass
 
 def Error(message):
@@ -32,7 +31,8 @@ try:
   if platform.lower() == "win32":
     system('color')
   clear()
-  
+
+  from PIL import Image
   ResizeTo = (int(input("What width should I scale the image to: ")),int(input("What height should I scale the image to: ")))
   PreserveRatio = BoolInput("Preserve aspect ratio during resize? (Yes/No) ")
   clear()
@@ -55,8 +55,8 @@ try:
     image.save("{0}-{1}x{2}.{3}".format(".".join(filenameArray[0:len(filenameArray)-1]), image.width, image.height, filenameArray[len(filenameArray)-1]))
     filesAmount+=1
   if (filesAmount == 0): raise NoImagesError
- 
-  
+
+
 except IOError:
   Error("Something went wrong when trying to load an image. Double-check for any non-image files in the current directory and try again.")
 except ValueError:
@@ -65,6 +65,8 @@ except BoolValueError:
   Error("The supplied value may be 'Y' or 'N' only.")
 except NoImagesError:
   Error("There are no applicable images in this directory! Check where you're running this from and try again.")
+except ModuleNotFoundError:
+  Error("Pillow isn't installed! Make sure you installed it as per instructions in [bit.ly/bulkresize-setup]")
 except:
   Error("An unexpected error occured.")
 else:
