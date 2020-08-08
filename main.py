@@ -72,3 +72,5 @@ except:
 else:
   print("Finished successfuly!")
   print("All files were saved by their original name with the new size suffixed.")
+finally:
+  input("\033[1;30mPress [ENTER] to exit\033[0m")
